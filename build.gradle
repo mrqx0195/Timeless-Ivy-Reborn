@@ -21,7 +21,7 @@ group = mod_group_id
 // apply plugin: 'org.spongepowered.mixin'
 
 base {
-    archivesName = mod_id
+    archivesName = "${mod_file_name}_${minecraft_version}"
 }
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
@@ -188,7 +188,7 @@ tasks.named('processResources', ProcessResources).configure {
             forge_version: forge_version, forge_version_range: forge_version_range,
             loader_version_range: loader_version_range,
             mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
-            mod_authors: mod_authors, mod_description: mod_description,
+            mod_authors: mod_authors, mod_description: mod_description, mod_file_name: mod_file_name,
             botania_version: botania_version, botania_version_range: botania_version_range,
             patchouli_version: patchouli_version, patchouli_version_range: patchouli_version_range,
             curios_version: curios_version, curios_version_range: curios_version_range,

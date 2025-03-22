@@ -1,4 +1,4 @@
-package net.mrqx.timeless_ivy_reborn.client.event;
+package net.mrqx.timeless_ivy_reborn.event;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;

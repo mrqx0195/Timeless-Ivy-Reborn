@@ -21,21 +21,20 @@ public class PlayerTickEventHandler {
         Player player = event.player;
         if (event.phase == Phase.END && !player.level().isClientSide()
                 && player.level().getGameTime() % TimelessIvyRebornConfig.REPAIR_TICK.get() == 0) {
-            if (TimelessIvyRebornConfig.ONLY_REPAIR_EQUIPMENTS.get()) {
-                List<EquipmentSlot> relevantSlots = Arrays.asList(
-                        EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND,
-                        EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET);
-
-                for (EquipmentSlot slot : relevantSlots) {
-                    ItemStack itemstack = player.getItemBySlot(slot);
-                    if (TimelessIvyItem.hasTimelessIvy(itemstack))
-                        processItemRepair(player, itemstack);
-                }
-            } else {
-                player.getAllSlots().forEach((ItemStack itemstack) -> {
+            if (!TimelessIvyRebornConfig.ONLY_REPAIR_EQUIPMENTS.get()) {
+                player.getInventory().items.forEach((ItemStack itemstack) -> {
                     if (TimelessIvyItem.hasTimelessIvy(itemstack) && itemstack.getDamageValue() > 0)
                         processItemRepair(player, itemstack);
                 });
+            }
+            List<EquipmentSlot> relevantSlots = Arrays.asList(
+                    EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND,
+                    EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET);
+
+            for (EquipmentSlot slot : relevantSlots) {
+                ItemStack itemstack = player.getItemBySlot(slot);
+                if (TimelessIvyItem.hasTimelessIvy(itemstack))
+                    processItemRepair(player, itemstack);
             }
         }
     }
